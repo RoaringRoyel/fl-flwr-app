@@ -9,7 +9,7 @@ description = ""
 license = "Apache-2.0"
 dependencies = [
     "flwr[simulation]>=1.18.0",
-    "flwr-datasets[vision]>=0.5.0",
+    "flwr-datasets[vision]>=0.5.0", 
     "torch==2.5.1",
     "torchvision==0.20.1",
 ]
@@ -20,14 +20,18 @@ packages = ["."]
 [tool.flwr.app]
 publisher = "minhazroyel"
 
+# here are the components for the app 
+
 [tool.flwr.app.components]
 serverapp = "royel_flwr.server_app:app"
 clientapp = "royel_flwr.client_app:app"
 
+
+# add here the things you need in the context 
 [tool.flwr.app.config]
 num-server-rounds = 3
-fraction-fit = 0.5
-local-epochs = 1
+fraction-fit = 0.8
+local-epochs = 4
 
 [tool.flwr.federations]
 default = "local-simulation"
