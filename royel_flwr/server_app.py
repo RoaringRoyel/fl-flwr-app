@@ -6,6 +6,9 @@ from flwr.server import ServerApp, ServerAppComponents, ServerConfig
 from flwr.server.strategy import FedAvg
 from royel_flwr.task import Net, get_weights
 
+
+
+#eval_metrics = [(res.num_examples, res.metrics) for _, res in results] [from Defination]
 def weighted_average(metrics: List[tuple[int, Metrics]]) -> Metrics:
     """ A function that aggregates metrics from clients. """
     accuracies = [num_examples * m["accuracy"] for num_examples,m in metrics]
@@ -13,6 +16,14 @@ def weighted_average(metrics: List[tuple[int, Metrics]]) -> Metrics:
     return {"accuracy": sum(accuracies) / total_examples}
 
 
+
+def on_fit_config(server_round: int) -> Metrics:
+    """Callback function to set the fit configuration for each round."""
+    """Adjust learning rate or other parameters based on the round number."""
+    lr = 0.01
+    if server_round > 2:
+        lr = 0.005
+    return{"lr": lr}
 
 def server_fn(context: Context):
     # Read from config
@@ -30,6 +41,7 @@ def server_fn(context: Context):
         min_available_clients=8,
         initial_parameters=parameters,
         evaluate_metrics_aggregation_fn=weighted_average,  # Custom aggregation function
+        on_fit_config_fn=on_fit_config,  # Callback to set fit config
     )
     config = ServerConfig(num_rounds=num_rounds)
 

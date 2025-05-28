@@ -29,7 +29,7 @@ clientapp = "royel_flwr.client_app:app"
 
 # add here the things you need in the context 
 [tool.flwr.app.config]
-num-server-rounds = 3
+num-server-rounds = 6
 fraction-fit = 0.8
 local-epochs = 4
 
