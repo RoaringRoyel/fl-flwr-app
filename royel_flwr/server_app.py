@@ -7,6 +7,21 @@ from flwr.server.strategy import FedAvg
 from royel_flwr.task import Net, get_weights, set_weights, test, get_transforms
 from datasets import load_dataset
 from torch.utils.data import DataLoader
+import json  # For complex metrics serialization
+
+def handle_fit_metrics(metrics: List[Tuple[int, Metrics]]) ->Metrics:
+    """Handle metrics from fit method in clients"""
+    b_values = []
+    for _,m in metrics:
+        my_metric_str = m["my_metric"]  # Extract the complex metric string
+        print(my_metric_str)  # Example of printing a complex metric
+        #it will print like STR not Dictionary
+        my_mtric = json.loads(my_metric_str)  # Convert back to dictionary if needed
+        b_values.append(my_mtric["b"])
+
+    return {"max_b": max(b_values), "min_b": min(b_values)}
+
+
 
 def get_evaulate_fn(testloader, device):
     """Return a callback that evaluates the global model on the test set."""
@@ -59,6 +74,7 @@ def server_fn(context: Context):
         fraction_evaluate=1.0,
         min_available_clients=8,
         initial_parameters=parameters,
+        fit_metrics_aggregation_fn = handle_fit_metrics, # Custom metrics aggregation function
         evaluate_metrics_aggregation_fn=weighted_average,  # Custom aggregation function
         on_fit_config_fn=on_fit_config,  # Callback to set fit config
         evaluate_fn= get_evaulate_fn(testloader, device="cpu"),  # Function to evaluate model on test set

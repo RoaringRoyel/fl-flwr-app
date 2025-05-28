@@ -1,11 +1,11 @@
 """royel-flwr: A Flower / PyTorch app."""
 
 import torch
-
+from random import random
 from flwr.client import ClientApp, NumPyClient
 from flwr.common import Context
 from royel_flwr.task import Net, get_weights, load_data, set_weights, test, train
-
+import json # For complex metrics serialization
 
 # Define Flower Client and client_fn
 class FlowerClient(NumPyClient):
@@ -27,10 +27,14 @@ class FlowerClient(NumPyClient):
             config["lr"], # learning rate from config will got to the TASK.py
             self.device,
         )
+
+        #creating a complex matrix of metrics
+        complex_metrics = {"a": 1234, "b": 5423, "Royel": random()}
+        complex_metric_str= json.dumps(complex_metrics)  # Convert to JSON string if needed
         return (
             get_weights(self.net),
             len(self.trainloader.dataset),
-            {"train_loss": train_loss},
+            {"train_loss": train_loss ,"my_metric" : complex_metric_str}  # Example of adding a random number to metrics,
         )
 
     def evaluate(self, parameters, config):
