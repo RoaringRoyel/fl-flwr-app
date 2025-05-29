@@ -1,22 +1,22 @@
 {
     "0": {
-        "loss": 2.3061609755689725,
-        "centralized_accuracy": 0.1
+        "loss": 2.3041333299094497,
+        "centralized_accuracy": 0.1174
     },
     "1": {
-        "loss": 2.2867442952177397,
-        "centralized_accuracy": 0.1598
+        "loss": 2.2601968967876496,
+        "centralized_accuracy": 0.1333
     },
     "2": {
-        "loss": 1.731755043371036,
-        "centralized_accuracy": 0.4514
+        "loss": 1.8627687132777497,
+        "centralized_accuracy": 0.4744
     },
     "3": {
-        "loss": 1.672578338426523,
-        "centralized_accuracy": 0.56
+        "loss": 1.9485388938992168,
+        "centralized_accuracy": 0.5292
     },
     "4": {
-        "loss": 2.1153093523110824,
-        "centralized_accuracy": 0.5624
+        "loss": 0.8950573605851243,
+        "centralized_accuracy": 0.6528
     }
 }
