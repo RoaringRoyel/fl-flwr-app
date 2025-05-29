@@ -1,0 +1,35 @@
+{
+  "os": "Windows-10-10.0.26100-SP0",
+  "python": "CPython 3.10.16",
+  "startedAt": "2025-05-29T11:49:33.422842Z",
+  "args": [
+    "--app",
+    ".",
+    "--num-supernodes",
+    "10"
+  ],
+  "program": "-m __main__",
+  "git": {
+    "remote": "https://github.com/RoaringRoyel/fl-flwr-app.git",
+    "commit": "1a39ce889b57063387df2596e47ca4ce2196733d"
+  },
+  "email": "minhazulroyel001@gmail.com",
+  "root": "F:\\Federated Learning Coding\\Flower\\royel-flwr",
+  "host": "RoyelS-BlackBox",
+  "executable": "D:\\Anaconda\\envs\\flower_fed_new\\python.exe",
+  "cpu_count": 4,
+  "cpu_count_logical": 8,
+  "disk": {
+    "/": {
+      "total": "121363230720",
+      "used": "96952352768"
+    }
+  },
+  "memory": {
+    "total": "8269422592"
+  },
+  "cpu": {
+    "count": 4,
+    "countLogical": 8
+  }
+}
