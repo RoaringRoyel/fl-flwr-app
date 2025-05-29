@@ -29,9 +29,9 @@ clientapp = "royel_flwr.client_app:app"
 
 # add here the things you need in the context 
 [tool.flwr.app.config]
-num-server-rounds = 6
+num-server-rounds = 4
 fraction-fit = 0.8
-local-epochs = 4
+local-epochs = 3
 
 [tool.flwr.federations]
 default = "local-simulation"

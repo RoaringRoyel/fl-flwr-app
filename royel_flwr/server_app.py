@@ -9,6 +9,8 @@ from datasets import load_dataset
 from torch.utils.data import DataLoader
 import json  # For complex metrics serialization
 
+from royel_flwr.my_strategy import CustomFedAvg  # Import your custom FedAvg strategy
+
 def handle_fit_metrics(metrics: List[Tuple[int, Metrics]]) ->Metrics:
     """Handle metrics from fit method in clients"""
     b_values = []
@@ -69,7 +71,7 @@ def server_fn(context: Context):
     testloader = DataLoader(testset.with_transform(get_transforms()), batch_size=32)
 
     # Define strategy
-    strategy = FedAvg(
+    strategy = CustomFedAvg(
         fraction_fit=fraction_fit,
         fraction_evaluate=1.0,
         min_available_clients=8,
