@@ -1,0 +1,22 @@
+{
+    "0": {
+        "loss": 2.3058846926155945,
+        "centralized_accuracy": 0.1011
+    },
+    "1": {
+        "loss": 2.215540952194994,
+        "centralized_accuracy": 0.2672
+    },
+    "2": {
+        "loss": 1.9252021674530955,
+        "centralized_accuracy": 0.5012
+    },
+    "3": {
+        "loss": 2.0314152351202677,
+        "centralized_accuracy": 0.5278
+    },
+    "4": {
+        "loss": 1.9236911245809196,
+        "centralized_accuracy": 0.5353
+    }
+}

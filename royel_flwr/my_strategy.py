@@ -3,12 +3,15 @@ from flwr.common import FitRes, Parameters, parameters_to_ndarrays
 from flwr.server.client_proxy import ClientProxy
 import torch
 from .task import Net, set_weights
+import json
 
 class CustomFedAvg(FedAvg):
     """Custom FedAvg strategy with additional functionality."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.results_to_save = {} #for saving the result matrics in each round
 
     def aggregate_fit(self,
                     server_round:int,
@@ -25,3 +28,19 @@ class CustomFedAvg(FedAvg):
             torch.save(model.state_dict(), f"Global_model_round_{server_round}")
 
             return parameteres_aggragated, metrics_aggregated
+    
+    def evaluate(self,
+                 server_round: int,
+                 parameters: Parameters
+                 )-> tuple[float, dict[str, bool | bytes | float | int | str]] | None:
+            loss, metrics = super().evaluate(server_round, parameters)
+
+            my_results= {"loss": loss, **metrics} 
+
+            self.results_to_save[server_round] = my_results
+
+           #save as a JSON file
+            with open("results_json",'w') as json_file:
+                 json.dump(self.results_to_save, json_file, indent=4)
+
+            return loss, metrics
